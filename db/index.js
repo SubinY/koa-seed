@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 const config  = require('./config')
 module.exports = () => {
-    const url = process.env.NODE_ENV === 'development' ?  config.prod :'mongodb://user:davidpassword@localhost:27017/harem' 
+    const url = process.env.NODE_ENV === 'development' ?  config.dev :config.prod
+    console.log('url--->',url)
     mongoose.connect(url, {
             useNewUrlParser: true,
             useUnifiedTopology: true
