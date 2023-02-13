@@ -1,0 +1,30 @@
+# deploy.yml
+name: deploy-docker
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      -master # 上传到此分支触发
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 检查代码
+      - name: Checkout # 将仓库内master分支的内容下载到工作目录
+        uses: actions/checkout@v3 # 脚本来自 https://github.com/actions/checkout
+      # 登录到阿里云容器镜像服务
+      - name: Login to Ali Docker
+        uses: docker/login-action@v1
+        # 配置登录信息，secrets 变量在 github settings -> secrets 中设置
+        with:
+          registry: ${{ secrets.REGISTRY_PATH }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+        # 构建镜像并上传到阿里云容器镜像仓库 (自行百度创建自己的镜像仓库)
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+         context: .
+         push: true
+         tags: ${{ secrets.REGISTRY_PATH }}
