@@ -10,7 +10,19 @@ class AdminDAO extends BaseService {
       data: ctx.currentUser
     };
   }
-  async getAdminInfoById() {}
+  async getAdminInfoById(ctx, next) {
+    try {
+      await crud.detail(
+        AdminModel,
+        {
+          id: ctx.query.id
+        },
+        ctx
+      );
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
   async getAdminList(ctx, next) {
     try {
       await crud.find(AdminModel, {}, ctx);

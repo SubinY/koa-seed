@@ -8,13 +8,11 @@ const { routeMetaInfo } = require('../utils/router');
 const { parseHeader } = require('../utils/jwt');
 
 // 是否超级管理员
-async function isAdmin(ctx) {
+async function isAdmin(ctx, next) {
   const { role = [] } = await AdminModel.findOne({
-    where: {
-      admin_id: ctx.currentUser.id
-    }
+    id: ctx.currentUser.id
   });
-  return role.includes(GROUP_TYPE_ENUM[0]);
+  return role.includes(GROUP_TYPE_ENUM[1]);
 }
 
 /**
@@ -25,11 +23,7 @@ async function mountUser(ctx, next) {
     const identity = parseHeader(ctx);
     const { id: userId } = identity;
     const user = await AdminModel.findOne({
-      where: {
-        where: {
-          admin_id: userId
-        }
-      }
+      id: userId
     });
     if (!user) {
       throw new NotFound({
@@ -112,10 +106,12 @@ async function groupRequired(ctx, next) {
     if (await isAdmin(ctx)) {
       await next();
     } else {
+      console.log(ctx, 'cccccc');
       if (ctx.matched) {
         const routeName = ctx._matchedRouteName || ctx.routerName;
         const endpoint = `${ctx.method} ${routeName}`;
         const { permission, module } = routeMetaInfo.get(endpoint);
+        console.log(permission, module, 'permission, module');
         const { role_id: roleId } = ctx.currentUser;
         /* ---------------- 角色包预留位 start ---------------- */
 

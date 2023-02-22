@@ -189,32 +189,19 @@ const updateMany = (model, where, params, ctx) => {
  * @param {*} ctx
  * @returns
  */
-const detail = (model, where, ctx) => {
+const detail = async (model, where, ctx) => {
   // 传入参数数量不固定,去掉无效参数
   clearEmpty(where);
-  return model
-    .findOne(where)
-    .then((res) => {
-      if (res) {
-        ctx.body = {
-          code: 200,
-          msg: '操作成功',
-          data: res
-        };
-      } else {
-        ctx.body = {
-          code: 500,
-          msg: '没找到您要的数据'
-        };
-      }
-    })
-    .catch((err) => {
-      ctx.body = {
-        code: 501,
-        msg: '操作异常'
-      };
-      console.log('err===>', err);
-    });
+  try {
+    const res = await model.findOne(where, '-_id');
+    ctx.body = {
+      code: 200,
+      msg: '操作成功',
+      data: res
+    };
+  } catch (error) {
+    throw new Error(error);
+  }
 };
 
 /**

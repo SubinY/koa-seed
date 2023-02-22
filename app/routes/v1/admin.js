@@ -1,7 +1,7 @@
 const { LinRouter, routeMetaInfo } = require('../../utils/router');
 const { AdminDAO } = require('../../controller/admin');
 const { LoginDAO } = require('../../controller/login');
-const { adminRequired, loginRequired } = require('../../middleware/auth');
+const { adminRequired, loginRequired, groupRequired } = require('../../middleware/auth');
 
 const adminDAO = new AdminDAO();
 const loginDAO = new LoginDAO();
@@ -19,6 +19,15 @@ router.linGet(
   router.permission('查询当前用户'),
   loginRequired,
   adminDAO.getAdminInfo
+);
+
+// 根据id获取用户信息
+router.linGet(
+  'getAdminInfoById',
+  '/getAdminInfoById',
+  router.permission('根据id获取用户信息'),
+  groupRequired,
+  adminDAO.getAdminInfoById
 );
 
 // 列表——查询所有后台用户
