@@ -12,6 +12,7 @@ class LinRouter extends Router {
   constructor(linRouterOptions) {
     super(linRouterOptions);
     this.module = null;
+    this.moduleDesc = '';
 
     // 如果存在 permission，默认挂载之
     this.mountPermission = true;
@@ -20,15 +21,26 @@ class LinRouter extends Router {
       if (linRouterOptions.module) {
         this.module = linRouterOptions.module;
       }
+      if (linRouterOptions.moduleDesc) {
+        this.moduleDesc = linRouterOptions.moduleDesc;
+      }
       if (isBoolean(linRouterOptions.mountPermission)) {
         this.mountPermission = linRouterOptions.mountPermission;
       }
     }
   }
 
-  permission(permission, mount) {
+  /**
+   * 权限Map
+   * @param {*} permission
+   * @param {*} desc
+   * @param {*} mount
+   * @returns
+   */
+  permission(permission, desc, mount) {
     return {
       permission,
+      desc,
       module: this.module,
       mount: isBoolean(mount) ? mount : this.mountPermission
     };
@@ -97,7 +109,8 @@ class LinRouter extends Router {
       const endpoint = 'PUT ' + name;
       routeMetaInfo.set(endpoint, {
         permission: meta.permission,
-        module: meta.module
+        module: meta.module,
+        desc: meta.desc
       });
     }
     if (isFunction(meta)) {
@@ -125,20 +138,20 @@ class LinRouter extends Router {
   }
 
   linPost(name, path, meta, ...middleware) {
-    // if (meta && meta.mount) {
-    //   assert(
-    //     !!(meta.permission && meta.module),
-    //     'permission and module must not be empty, if you want to mount'
-    //   );
-    //   const endpoint = 'POST ' + name;
-    //   routeMetaInfo.set(endpoint, {
-    //     permission: meta.permission,
-    //     module: meta.module
-    //   });
-    // }
-    // if (isFunction(meta)) {
-    //   return this.post(name, path, meta, ...middleware);
-    // }
+    if (meta && meta.mount) {
+      assert(
+        !!(meta.permission && meta.module),
+        'permission and module must not be empty, if you want to mount'
+      );
+      const endpoint = 'POST ' + name;
+      routeMetaInfo.set(endpoint, {
+        permission: meta.permission,
+        module: meta.module
+      });
+    }
+    if (isFunction(meta)) {
+      return this.post(name, path, meta, ...middleware);
+    }
     return this.post(name, path, ...middleware);
   }
 

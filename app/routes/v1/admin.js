@@ -8,7 +8,8 @@ const loginDAO = new LoginDAO();
 
 const router = new LinRouter({
   prefix: '/v1/admin',
-  module: 'admin'
+  module: 'admin',
+  moduleDesc: '管理员模块'
   // mountPermission: true
 });
 
@@ -16,8 +17,8 @@ const router = new LinRouter({
 router.linGet(
   'getAdminInfo',
   '/getAdminInfo',
-  router.permission('查询当前用户'),
-  loginRequired,
+  router.permission('admin_getAdminInfo', '查看当前用户'),
+  groupRequired,
   adminDAO.getAdminInfo
 );
 
@@ -25,7 +26,7 @@ router.linGet(
 router.linGet(
   'getAdminInfoById',
   '/getAdminInfoById',
-  router.permission('根据id获取用户信息'),
+  router.permission('admin_getAdminInfoById', '根据id获取用户信息'),
   groupRequired,
   adminDAO.getAdminInfoById
 );
@@ -34,7 +35,7 @@ router.linGet(
 router.linGet(
   'getAdminList',
   '/list',
-  router.permission('查询所有后台用户'),
+  router.permission('admin_getAdminList', '列表查询'),
   adminRequired,
   adminDAO.getAdminList
 );
@@ -43,7 +44,7 @@ router.linGet(
 router.linPost(
   'createUser',
   '/create',
-  router.permission('创建后台用户'),
+  router.permission('admin_createUser', '创建用户'),
   adminDAO.create
 );
 
@@ -51,7 +52,7 @@ router.linPost(
 router.linDelete(
   'deleteUser',
   '/delete:id',
-  router.permission('删除后台用户'),
+  router.permission('admin_deleteUser', '删除用户'),
   adminDAO.delete
 );
 
@@ -59,7 +60,7 @@ router.linDelete(
 router.linPut(
   'updateUser',
   '/update',
-  router.permission('更新后台用户'),
+  router.permission('admin_updateUser', '更新用户'),
   adminDAO.update
 );
 
@@ -67,7 +68,7 @@ router.linPut(
 router.linGet(
   'getDetail',
   '/detail/:id',
-  router.permission('查看后台用户'),
+  router.permission('admin_getDetail', '用户详情'),
   adminDAO.detail
 );
 
@@ -75,7 +76,6 @@ router.linGet(
 router.linPost(
   'userLogin',
   '/login',
-  router.permission('后台用户登录'),
   loginDAO.login
 );
 

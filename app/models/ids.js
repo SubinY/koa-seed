@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 const IdsSchema = new mongoose.Schema({
   admin_id: Number,
   user_id: Number,
+  role_group_id: Number,
   permission_id: Number
 });
 
@@ -16,6 +17,7 @@ Ids.findOne((err, data) => {
     const newIds = new Ids({
       user_id: 0,
       admin_id: 0,
+      role_group_id: 0,
       permission_id: 0
     });
     newIds.save();

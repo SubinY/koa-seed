@@ -106,33 +106,44 @@ async function groupRequired(ctx, next) {
     if (await isAdmin(ctx)) {
       await next();
     } else {
-      console.log(ctx, 'cccccc');
       if (ctx.matched) {
         const routeName = ctx._matchedRouteName || ctx.routerName;
         const endpoint = `${ctx.method} ${routeName}`;
         const { permission, module } = routeMetaInfo.get(endpoint);
-        console.log(permission, module, 'permission, module');
-        const { role_id: roleId } = ctx.currentUser;
+        console.log(routeMetaInfo, 'routeMetaInfo')
+        const { role: roleArr = [] } = ctx.currentUser;
         /* ---------------- 角色包预留位 start ---------------- */
 
         /* ---------------- 角色包预留位 end ---------------- */
-        const role = await RoleGroupModel.find({
-          where: {
-            role_id: roleId
+        let currentPermissionNames = [];
+        for (const role of roleArr) {
+          const roleItem = await RoleGroupModel.findOne({
+            role_group: role
+          });
+          if (!roleItem) {
+            throw new NotFound({
+              code: 10231
+            });
           }
-        });
-        const { role_permission: rolePermission } = role;
-        const permissionIds = uniq(rolePermission.map((v) => v.permission_id));
-        const item = await PermissionModel.findOne({
-          where: {
+          currentPermissionNames = [
+            ...currentPermissionNames,
+            ...roleItem.permission_ids
+          ];
+        }
+        currentPermissionNames = uniq(currentPermissionNames);
+        if (currentPermissionNames.includes(permission)) {
+          const permissionItem = await PermissionModel.findOne({
             name: permission,
-            mount: 1, // type
-            module,
-            id: permissionIds
+            mount: true,
+            module
+          });
+          if (permissionItem) {
+            await next();
+          } else {
+            throw new AuthFailed({
+              code: 10001
+            });
           }
-        });
-        if (item) {
-          await next();
         } else {
           throw new AuthFailed({
             code: 10001

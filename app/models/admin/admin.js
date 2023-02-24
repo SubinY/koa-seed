@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const shortid = require('shortid');
-const initDBData = require('../../utils/initDBData');
+const { initDBData } = require('../../utils/initDBData');
 const md5 = require('md5-node');
 
 const AdminSchema = new mongoose.Schema(
@@ -8,35 +8,35 @@ const AdminSchema = new mongoose.Schema(
     id: {
       type: Number,
       unique: true,
-      require: true
+      require: true,
     },
     user_name: String,
     user_desc: String,
     password: {
       type: String,
       select: false,
-      default: md5('123456')
+      default: md5('123456'),
     },
     avatar: {
       type: String,
-      default: ''
+      default: '',
     },
     phone: {
       type: String,
-      default: ''
+      default: '',
     },
     email: {
       type: String,
-      default: ''
+      default: '',
     },
     role: {
       type: Array,
-      default: []
-    }
+      default: [],
+    },
   },
   {
-    versionKey: false
-  }
+    versionKey: false,
+  },
 );
 
 AdminSchema.index({ id: 1 });

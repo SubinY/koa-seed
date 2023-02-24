@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "role_group": "super",
+    "role_group_name": "超级管理员",
+    "permission_ids": ["all"]
+  },
+  {
+    "id": 2,
+    "role_group": "admin",
+    "role_group_name": "普通管理员",
+    "permission_ids": ["admin", "admin_getAdminInfo", "admin_getAdminInfoById"]
+  }
+]

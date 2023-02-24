@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const shortid = require('shortid');
-const initDBData = require('../../utils/initDBData');
+const { initDBData, initPermissionJson } = require('../../utils/initDBData');
 
 // 路由权限
 const Schema = new mongoose.Schema(
@@ -9,38 +9,44 @@ const Schema = new mongoose.Schema(
       type: Number,
       unique: true,
       require: true,
-      default: shortid.generate
+      default: shortid.generate,
     },
     module: {
       type: String,
       comment: '权限所属模块',
-      default: 'root'
     },
     name: {
       type: String,
-      require: true,
-      unique: true,
-      comment: '权限名称'
+      comment: '权限名称',
+    },
+    parent_id: {
+      type: Number,
+    },
+    desc: {
+      type: String,
+      comment: '权限描述',
     },
     uri: {
       type: String,
-      comment: '权限URI'
+      comment: '权限URI',
     },
     type: {
       type: String,
-      comment: '路由(page)、按钮(button)、其他(other)'
+      comment: '路由(page)、按钮(button)、接口(api)',
     },
     mount: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
-  { versionKey: false }
+  { versionKey: false },
 );
+
+Schema.index({ id: 1 });
 
 const Permission = mongoose.model('Permission', Schema, 'permission');
 
-initDBData(Permission);
+initPermissionJson(() => initDBData(Permission));
 
 module.exports = {
-  PermissionModel: Permission
+  PermissionModel: Permission,
 };

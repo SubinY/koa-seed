@@ -1,0 +1,22 @@
+[
+  { "parent_id": 0, "id": 1, "module": "root", "name": "home", "desc": "首页", "type": "page", "mount": true },
+  { "parent_id": 0, "id": 2, "module": "root", "name": "admin", "desc": "管理员模块", "type": "page", "mount": true },
+  {
+    "parent_id": 2,
+    "id": 3,
+    "module": "admin",
+    "name": "admin_getAdminInfo",
+    "desc": "查看当前用户",
+    "type": "api",
+    "mount": true
+  },
+  {
+    "parent_id": 2,
+    "id": 4,
+    "module": "admin",
+    "name": "admin_getAdminInfoById",
+    "desc": "根据id获取用户信息",
+    "type": "api",
+    "mount": true
+  }
+]

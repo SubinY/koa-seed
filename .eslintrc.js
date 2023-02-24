@@ -10,7 +10,8 @@ module.exports = {
     'no-unused-vars': 1,
     'handle-callback-err': 0,
     'one-var': 0,
-    'spaced-comment': 0
+    'spaced-comment': 0,
+    'comma-dangle': 0,
   },
   parserOptions: {
     parser: 'babel-eslint'
