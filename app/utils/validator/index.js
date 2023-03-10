@@ -338,7 +338,6 @@ class Rule {
             return validator1.isBoolean(String(value));
           }
         case 'isNotEmpty':
-          console.log(value, 'value');
           return !validator1.isEmpty(value);
         default:
           return validator1[this.validateFunction](value, ...this.options);

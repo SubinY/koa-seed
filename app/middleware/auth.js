@@ -110,7 +110,6 @@ async function groupRequired(ctx, next) {
         const routeName = ctx._matchedRouteName || ctx.routerName;
         const endpoint = `${ctx.method} ${routeName}`;
         const { permission, module } = routeMetaInfo.get(endpoint);
-        console.log(routeMetaInfo, 'routeMetaInfo')
         const { role: roleArr = [] } = ctx.currentUser;
         /* ---------------- 角色包预留位 start ---------------- */
 

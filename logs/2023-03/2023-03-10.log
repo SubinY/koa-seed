@@ -1,0 +1,52 @@
+2023-03-10 17:56:48,253 DEBUG 5700  --- [YW2020082814] - [OPTIONS] -> [204][/v1/admin/login] from: ::1 costs: 0ms data:{
+    "param": {}
+}
+2023-03-10 17:56:48,258 DEBUG 5700  --- [YW2020082814] - [POST] -> [200][/v1/admin/login] from: ::1 costs: 3ms data:{
+    "param": {},
+    "body": {
+        "captcha": "",
+        "username": "admin",
+        "password": "123456"
+    }
+}
+2023-03-10 17:56:48,266 DEBUG 5700  --- [YW2020082814] - [OPTIONS] -> [204][/v1/admin/getAdminInfo] from: ::1 costs: 0ms data:{
+    "param": {}
+}
+2023-03-10 17:56:48,275 DEBUG 5700  --- [YW2020082814] - [GET] -> [200][/v1/admin/getAdminInfo] from: ::1 costs: 6ms data:{
+    "param": {},
+    "body": {}
+}
+2023-03-10 17:56:48,282 DEBUG 5700  --- [YW2020082814] - [OPTIONS] -> [204][/v1/admin/getAdminInfoById/1] from: ::1 costs: 0ms data:{
+    "param": {}
+}
+2023-03-10 17:56:48,289 DEBUG 5700  --- [YW2020082814] - [GET] -> [401][/v1/admin/getAdminInfoById/1] from: ::1 costs: 5ms data:{
+    "param": {},
+    "body": {}
+}
+[31m2023-03-10 17:56:48,290 ERROR 5700  --- [YW2020082814] - [GET] -> [/v1/admin/getAdminInfoById/1] from: ::1 errmsg: 服务器未知错误 errcode: 9999 costs: 5ms[39m
+2023-03-10 17:57:56,698 DEBUG 15996  --- [YW2020082814] - [OPTIONS] -> [204][/v1/admin/login] from: ::1 costs: 1ms data:{
+    "param": {}
+}
+2023-03-10 17:57:56,717 DEBUG 15996  --- [YW2020082814] - [POST] -> [200][/v1/admin/login] from: ::1 costs: 15ms data:{
+    "param": {},
+    "body": {
+        "captcha": "",
+        "username": "admin",
+        "password": "123456"
+    }
+}
+2023-03-10 17:57:56,725 DEBUG 15996  --- [YW2020082814] - [OPTIONS] -> [204][/v1/admin/getAdminInfo] from: ::1 costs: 0ms data:{
+    "param": {}
+}
+2023-03-10 17:57:56,737 DEBUG 15996  --- [YW2020082814] - [GET] -> [200][/v1/admin/getAdminInfo] from: ::1 costs: 9ms data:{
+    "param": {},
+    "body": {}
+}
+2023-03-10 17:57:56,744 DEBUG 15996  --- [YW2020082814] - [OPTIONS] -> [204][/v1/admin/getAdminInfoById/1] from: ::1 costs: 0ms data:{
+    "param": {}
+}
+2023-03-10 17:57:56,750 DEBUG 15996  --- [YW2020082814] - [GET] -> [401][/v1/admin/getAdminInfoById/1] from: ::1 costs: 4ms data:{
+    "param": {},
+    "body": {}
+}
+[31m2023-03-10 17:57:56,756 ERROR 15996  --- [YW2020082814] - [GET] -> [/v1/admin/getAdminInfoById/1] from: ::1 errmsg: 服务器未知错误 errcode: 9999 costs: 4ms[39m

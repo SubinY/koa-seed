@@ -17,6 +17,7 @@
     "cross-env": "^7.0.3",
     "crypto": "^1.0.1",
     "debug": "^4.1.1",
+    "egg-logger": "^3.3.0",
     "fs-extra": "^11.1.0",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.7.0",
@@ -34,6 +35,7 @@
     "koa2-cors": "^2.0.6",
     "lodash": "^4.17.21",
     "md5-node": "^1.0.1",
+    "moment": "^2.29.4",
     "mongoose": "^6.2.4",
     "node-fetch": "^3.3.0",
     "pm2": "^5.2.0",
@@ -61,7 +63,7 @@
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "nodemon": "^1.19.1",
+    "nodemon": "^2.0.21",
     "prettier": "1.16.4"
   }
 }
