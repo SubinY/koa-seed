@@ -2,11 +2,6 @@ const mongoose = require('mongoose');
 
 const Schema = new mongoose.Schema(
   {
-    id: {
-      type: Number,
-      unique: true,
-      require: true,
-    },
     path: {
       type: String,
       require: true,
@@ -29,8 +24,6 @@ const Schema = new mongoose.Schema(
   },
   { versionKey: false },
 );
-
-Schema.index({ id: 1 });
 
 const File = mongoose.model('File', Schema, 'file');
 

@@ -15,7 +15,7 @@ function toType(obj) {
     .toLowerCase();
 }
 function clearEmpty(o) {
-  for (var key in o) {
+  for (let key in o) {
     // console.log('o[key]结果===>',o[key])
     if (
       !o[key] ||

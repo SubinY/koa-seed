@@ -12,6 +12,8 @@ const MongoConnect = require('./db');
 const config = require('./utils/config');
 const { logging } = require('./utils/logging');
 const { httpLogger } = require('./middleware/httpLogger');
+const staticServer = require('koa-static');
+const mount = require('koa-mount');
 
 // 基础中间件
 const basicMiddlewaresInit = app => {
@@ -82,16 +84,20 @@ const basicMiddlewaresInit = app => {
   });
 };
 
-// 静态文件配置
+// 静态资源配置
 const staticPublicInit = app => {
-  app.use(require('koa-static')(path.join(__dirname, '/public')));
+  // 上传文件资源路径
+  const assetsDir = config.getItem('file.storeDir', 'app/public/static');
+  app.use(mount('/static', staticServer(assetsDir)));
+  // 静态资源文件
+  app.use(staticServer(path.join(__dirname, '/public')));
 };
 
 const createApp = async () => {
   const app = new Koa();
   MongoConnect();
-  basicMiddlewaresInit(app);
   staticPublicInit(app);
+  basicMiddlewaresInit(app);
   return app;
 };
 

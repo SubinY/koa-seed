@@ -40,7 +40,7 @@ class LocalUploader extends Uploader {
         const target = fs.createWriteStream(absolutePath);
         await target.write(file.data);
         const ext = path.extname(realName);
-        const saved = await FileModel.createRecord(
+        const saved = await FileModel.create(
           {
             path: relativePath,
             // type: 1,

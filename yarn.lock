@@ -4147,6 +4147,14 @@ koa-logger@^3.2.0:
     humanize-number "0.0.2"
     passthrough-counter "^1.0.0"
 
+koa-mount@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmmirror.com/koa-mount/-/koa-mount-4.0.0.tgz#e0265e58198e1a14ef889514c607254ff386329c"
+  integrity sha512-rm71jaA/P+6HeCpoRhmCv8KVBIi0tfGuO/dMKicbQnQW/YJntJ6MnnspkodoA4QstMVEZArsCphmd0bJEtoMjQ==
+  dependencies:
+    debug "^4.0.1"
+    koa-compose "^4.1.0"
+
 koa-onerror@^4.1.0:
   version "4.2.0"
   resolved "https://registry.npmmirror.com/koa-onerror/-/koa-onerror-4.2.0.tgz#c617bb71dd036f27f6ade58e70480a50ff5fd4b1"
