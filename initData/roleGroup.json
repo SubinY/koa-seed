@@ -3,12 +3,12 @@
     "id": 1,
     "role_group": "super",
     "role_group_name": "超级管理员",
-    "permission_ids": ["all"]
+    "permission_ids": [1, 2, 3, 4]
   },
   {
     "id": 2,
     "role_group": "admin",
     "role_group_name": "普通管理员",
-    "permission_ids": ["admin", "admin_getAdminInfo", "admin_getAdminInfoById"]
+    "permission_ids": [1, 2, 3]
   }
 ]

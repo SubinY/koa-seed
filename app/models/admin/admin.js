@@ -35,11 +35,19 @@ const AdminSchema = new mongoose.Schema(
     },
   },
   {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
     versionKey: false,
   },
 );
 
 AdminSchema.index({ id: 1 });
+AdminSchema.virtual('roleList', {
+  ref: 'RoleGroup',
+  localField: 'role',
+  foreignField: 'id',
+  justOne: false,
+});
 
 const Admin = mongoose.model('Admin', AdminSchema, 'admin');
 

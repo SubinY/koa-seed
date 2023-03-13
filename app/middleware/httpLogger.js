@@ -38,10 +38,9 @@ export const httpLogger = async (ctx, next) => {
         ctx.app.emit('error', (error = new NotFound()), ctx);
       } else if (ctx.status === 405) {
         ctx.app.emit('error', (error = new MethodNotAllowed()), ctx);
-      } else if (!ctx.body) {
+      } else {
         ctx.app.emit('error', error, ctx);
       }
-      console.log(ctx);
       ctx.app.logger.error(
         `[${ctx.method}] -> [${ctx.url}] from: ${ctx.ip} errmsg: ${error.message} errcode: ${
           error.code

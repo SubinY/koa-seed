@@ -3,12 +3,12 @@
     "id": 1,
     "user_name": "super",
     "user_desc": "超级管理员",
-    "role": ["super"]
+    "role": [1, 2]
   },
   {
     "id": 2,
     "user_name": "admin",
     "user_desc": "管理员",
-    "role": ["admin"]
+    "role": [2]
   }
 ]

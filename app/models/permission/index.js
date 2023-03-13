@@ -8,8 +8,7 @@ const Schema = new mongoose.Schema(
     id: {
       type: Number,
       unique: true,
-      require: true,
-      default: shortid.generate,
+      require: true
     },
     module: {
       type: String,

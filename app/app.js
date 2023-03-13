@@ -63,24 +63,17 @@ const basicMiddlewaresInit = app => {
     }),
   );
 
-  // 统一处理httpException
-  app.use((ctx, next) => {
-    return next().catch(error => {
-      ctx.status = error.status || 500;
-      ctx.body = {
-        code: error.code,
-        msg: error.message,
-      };
-    });
-  });
-
   // routes
   const routerApp = require('./routes/index');
   routerApp(app);
 
   // error-handling
   app.on('error', (err, ctx) => {
-    console.error('server error', err);
+    ctx.status = err.status || 500;
+    ctx.body = {
+      code: err.code,
+      msg: err.message,
+    };
   });
 };
 
